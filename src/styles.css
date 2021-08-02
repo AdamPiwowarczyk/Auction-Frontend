@@ -1,1 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: rgb(219, 214, 205); }
+
+.mat-sidenav-container {
+    background-color: rgb(219, 214, 205);
+}
+
+.registration-dialog-container .mat-dialog-container {
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    /* background: #7654b4;  */
+    background: black; 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    /* background: #673ab7;  */
+    background: black; 
+}
+
+.mat-dialog-container, .mat-card, .mat-toolbar, .mat-sidenav {
+    background-color: rgb(235, 230, 222);
+}
+
+.mat-dialog-container {
+    padding-bottom: 0 !important;
+}
+
+.mat-card {
+    padding-bottom: 5px !important;
+}
+
+.additional-selection {
+    opacity: 0.75;
+    /* font-size: 0.75em; */
+}
+
+.li {
+    overflow: auto;
+}
+
+.mat-list-base {
+    padding-top: 0 !important;
+}
+
+.mat-snack-bar-container {
+    background-color: rgb(128, 128, 128)
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px rgb(235, 230, 222) inset;
+}

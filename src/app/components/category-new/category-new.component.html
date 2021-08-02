@@ -1,0 +1,8 @@
+<mat-form-field style="width: 100%">
+    <input matInput placeholder="Nazwa" required [(ngModel)]="category.name" name="name" #name="ngModel"/>
+    <mat-error [hidden]="name.valid || name.pristine">Nazwa jest wymagana</mat-error>
+</mat-form-field>
+<div style="display: flex; justify-content: space-between; padding-bottom: 24px;">
+    <button mat-stroked-button color="primary" (click)="cancel()">Zamknij</button>
+    <button [disabled]="!name.valid" mat-raised-button color="primary" (click)="save()">Zapisz</button>
+</div>

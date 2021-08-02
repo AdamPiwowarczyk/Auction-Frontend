@@ -1,0 +1,17 @@
+.label {
+    font-weight: bold;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+div {
+    padding-bottom: 5px;
+}
+
+mat-card:hover {
+    background-color: rgb(243, 240, 234);
+}

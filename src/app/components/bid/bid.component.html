@@ -1,0 +1,84 @@
+<h1 style="font-weight: 550; display: flex; justify-content: center; width: 100%; position: relative">
+    Licytacja: {{ subject.caption }}
+    <button mat-icon-button style="position: absolute; top: -15px; right: -15px" (click)="cancel()">
+        <mat-icon>cancel</mat-icon>
+    </button>
+</h1>
+<hr>
+<div style="display: flex;">
+    <div style="flex: 1; padding-right: 15px;">
+        <div style="flex: 1; position: relative; height: 335px;">
+            <div class="row">
+                <div class="label">
+                    Kod:
+                </div>
+                <div>
+                    {{ subject.code }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">
+                    Aktualna cena:
+                </div>
+                <div *ngIf="stackDto.currentPrice != null">
+                    {{ stackDto.currentPrice }} zł
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">
+                    Data wystawienia:
+                </div>
+                <div>
+                    {{ subject.publishDate | date:'short' }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">
+                    Termin licytacji:
+                </div>
+                <div>
+                    {{ subject.endDateAccessor | date:'short' }}
+                </div>
+            </div>
+            <div class="label row">
+                Opis:
+            </div>
+            <div style="max-height: 60px; overflow: auto; max-width: 260px;">
+                {{ subject.description }}
+            </div>
+                
+            <div class="label row">
+                Kategorie:
+            </div>
+            <span *ngFor="let category of subject.categories; let i = index" style="max-height: 45px; overflow: auto;">
+                <span style="display: inline-block;">
+                    {{ category.name }}
+                </span>
+                <span *ngIf="i < subject.categories.length - 1">, </span>
+            </span>
+        </div>
+        <!-- <div style="text-align: center;">
+            <button mat-stroked-button color="primary" (click)="cancel()" style="font-size: inherit; margin-right: 20px;">
+                Zamknij
+            </button>
+        </div> -->
+    </div>
+    <div style="flex: 2">
+        <div style="flex: 1.8;">
+            <img *ngIf="showImage" [src]="subject.picByte" style="width: 100%">
+            <div *ngIf="!showImage" style="display: flex; justify-content: center; align-items: center; height: 250px">
+                <span>Miejsce na zdjęcie</span> 
+            </div>
+        </div>
+    </div>
+</div>
+<div style="text-align: center; font-size: 18px">
+    <span style="font-weight: bold; margin-right: 10px;">
+        Cena:
+    </span>
+    <mat-form-field style="margin-right: 30px; width: 90px;">
+        <input matInput type="number" min="{{ stackDto.minPrice }}" [(ngModel)]="currentPrice" style="text-align: right;">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="sendMessage()" [disabled]="bidDisabled" style="font-size: inherit; text-align: right;">Licytuj</button>
+    <mat-error *ngIf="!validPrice()" style="position: relative; right: 75px; bottom: 15px; font-size: 75%;">Minimalna cena to {{ stackDto.minPrice }}</mat-error>
+</div>

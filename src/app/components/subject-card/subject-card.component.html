@@ -1,0 +1,61 @@
+<mat-card style="width: 800px; height: 350px;">
+    <mat-card-header class="card-title">
+        <mat-card-title>{{ subject.caption }}</mat-card-title>
+        <button *ngIf="allowEdition()" mat-icon-button style="position: absolute; top: 0; right: 0" (click)="deleteSubject()">
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </mat-card-header>
+    <mat-card-content style="display: flex;">
+        <div style="flex: 1.8; margin-right: 20px;">
+            <img *ngIf="showImage()" [src]="subject.picByte" style="width: 100%;">
+            <div *ngIf="!showImage()" style="display: flex; justify-content: center; align-items: center; height: 250px">
+                <span>Miejsce na zdjęcie</span> 
+            </div>
+        </div>
+        <div style="flex: 1; position: relative; height: 300px;">
+            <div class="row">
+                <div class="label">
+                    Cena:
+                </div>
+                <div>
+                    {{ subject.soldPrice ? subject.soldPrice : subject.basicPrice }} zł
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">
+                    Data wystawienia:
+                </div>
+                <div>
+                    {{ subject.publishDate | date:'short' }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">
+                    Termin licytacji:
+                </div>
+                <div>
+                    {{ subject.endDateAccessor | date:'short' }}
+                </div>
+            </div>
+            <div class="label row">
+                Opis:
+            </div>
+            <div style="max-height: 60px; overflow: auto; max-width: 260px;">
+                {{ subject.description }}
+            </div>
+                
+            <div class="label row">
+                Kategorie:
+            </div>
+            <span *ngFor="let category of subject.categories; let i = index" style="max-height: 45px; overflow: auto;">
+                <span style="display: inline-block;">
+                    {{ category.name }}
+                </span>
+                <span *ngIf="i < subject.categories.length - 1">, </span>
+            </span>
+            <button [disabled]="!this.allowEdition()" mat-stroked-button color="primary" style="position: absolute; bottom: 0; left: 0;" (click)="openEditDialog()">Edytuj</button>
+            <button [disabled]="subject.endDateAccessor == null || subject.archive == true" mat-raised-button color="primary" style="position: absolute; bottom: 0; right: 0" (click)="openBidDialog()">Licytuj</button>
+            <!-- <button [disabled]="subject.endDateAccessor == null || subject.archive == true" mat-raised-button color="primary" style="position: absolute; bottom: 0; right: 0" [routerLink]="['/bid/'+subject.code]">Licytuj</button> -->
+        </div>
+    </mat-card-content>
+</mat-card>

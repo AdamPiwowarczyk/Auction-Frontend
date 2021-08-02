@@ -1,0 +1,14 @@
+.label {
+    font-weight: bold;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    padding-bottom: 10px;
+}
+
+.mat-icon-button ::ng-deep .mat-button-focus-overlay {
+    display: none;
+}
