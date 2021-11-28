@@ -13,10 +13,12 @@ import { RegistrationDialogComponent } from '../registration-dialog/registration
 export class LoginComponent {
   credentials: Credentials;
 
-  constructor(private authService: AuthService, private router: Router, public dialog: MatDialog) {
+  constructor(private authService: AuthService,
+              private router: Router,
+              public dialog: MatDialog) {
     this.credentials = {
-      username:"user1", 
-      password: "test"
+      username:"", 
+      password: ""
     };
    }
 
@@ -30,15 +32,9 @@ export class LoginComponent {
   }
 
   logout(): void {
-    // this.credentials.password = "";
+    this.credentials.password = "";
     localStorage.removeItem('token');
   }
-
-  // getRoles(): void {
-  //   this.authService.getRoles().subscribe(
-  //     response => console.log(response),
-  //     error => console.log(error));
-  // }
 
   openRegistrationDialog(): void {
     const dialogRef = this.dialog.open(RegistrationDialogComponent, {
@@ -53,5 +49,4 @@ export class LoginComponent {
       }
     });
   }
-
 }

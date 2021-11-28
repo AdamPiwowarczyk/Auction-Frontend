@@ -2,7 +2,7 @@
     <div style="display: flex; position: relative;">
         <div style="display: flex; flex-direction: column; margin-right: 15px;">
             <mat-form-field>
-                <input matInput placeholder="Kod" required [(ngModel)]="subject.code" name="code">
+                <input matInput placeholder="Kod" [disabled]="isEdit" required [(ngModel)]="subject.code" name="code">
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="Nazwa" required [(ngModel)]="subject.caption" name="caption">
@@ -12,17 +12,16 @@
                 <mat-hint [hidden]="subject.basicPrice >= 0 || basicPrice.pristine" style="color:red">Minimalna wartość to 0</mat-hint>
             </mat-form-field>
             <mat-form-field>
-                <!-- <input matInput [ngxMatDatetimePicker]="picker" placeholder="Termin licytacji" [(ngModel)]="subject.endDate" [min]="getMinDate()" name="endDate"> -->
                 <input matInput 
-                       [ngxMatDatetimePicker]="picker" 
-                       placeholder="Termin licytacji" 
+                       [ngxMatDatetimePicker]="picker"
+                       [min]="getMinDate()"
                        [(ngModel)]="subject.endDateAccessor"
+                       placeholder="Termin licytacji"
                        name="endDate">
                 <mat-datepicker-toggle matSuffix [for]="picker" name="picker"></mat-datepicker-toggle>
                     <ngx-mat-datetime-picker #picker>
                 </ngx-mat-datetime-picker>       
             </mat-form-field>
-            <!-- [min]="getMinDate()" - 14 linia <input.. -->
             <div style="display: flex;">
                 <mat-form-field>
                     <mat-label>Kategorie</mat-label>
@@ -34,16 +33,10 @@
                             </span>
                             </mat-select-trigger>
                         <mat-option *ngFor="let category of categories" [value]="category">
-                            {{ category.name }} 
-                            <!-- <button mat-icon-button style="position: absolute; right: 0" (click)="deleteCategory(category.name)">
-                                <mat-icon>cancel</mat-icon>
-                            </button> -->
+                            {{ category.name }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <!-- <button mat-icon-button color="primary" (click)="addNewCategory()" style="top: 5px">
-                    <mat-icon>plus_one</mat-icon>
-                </button> -->
             </div>
             <mat-form-field>
                 <mat-label>Opis</mat-label>
@@ -56,9 +49,9 @@
                           [(ngModel)]="subject.description"></textarea>
             </mat-form-field>
         </div>
-        <div style="width: 100%">
+        <div style="width: 100%;">
             <div style="display: flex; justify-content: center">
-            <input #fileInput hidden="true" type="file" (change)="onFileChanged($event)"/>
+                <input #fileInput hidden="true" type="file" (change)="onFileChanged($event)"/>
                 <button mat-stroked-button color="primary" (click)="fileInput.click()">
                     Wybierz plik
                 </button>
@@ -66,22 +59,20 @@
                     Usuń
                 </button>
             </div>
-            <img *ngIf="imageUrl != null" [src]="imageUrl" style="width: 100%">
-            <img *ngIf="imageUrl == null && subject.picByte != null" [src]="subject.picByte" style="width: 100%">
-            <!-- <img *ngIf="imageUrl == null && subject.picByte?.length > 27" [src]="subject.picByte" style="width: 100%"> -->
+            <div style="display: flex; justify-content: center;">
+                <img *ngIf="imageUrl != null" [src]="imageUrl" style="max-width: 500px; max-height: 300px;">
+            </div>
+            <div style="display: flex; justify-content: center;">
+                <img *ngIf="imageUrl == null && subject.picByte != null" [src]="subject.picByte" style="max-width: 500px; max-height: 300px;">
+            </div>
         </div>
     </div>
     <div style="display: flex; justify-content: space-between; margin: 20px 0 20px 0;">
-    <!-- <div style="display: flex; justify-content: space-between; margin-top: 20px;"> -->
         <button mat-stroked-button color="primary" (click)="cancel()">
             Anuluj
         </button>
         <button [disabled]="!subjectForm.form.valid || !isSubjectModifiedAndValid()" mat-raised-button color="primary" (click)="save()"> 
             {{ modifySaveButton() }} 
         </button>
-        <!-- <div>
-            <mat-slide-toggle [disabled]="!subject.endDate" color="primary" [(ngModel)]="publish" name="publish" style="margin-right: 10px;">Opublikuj</mat-slide-toggle>
-            <button [disabled]="!subjectForm.form.valid" mat-raised-button color="primary" (click)="save()"> Zapisz</button>
-        </div> -->
     </div>
 </form>

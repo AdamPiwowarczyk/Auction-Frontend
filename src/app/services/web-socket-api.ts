@@ -7,16 +7,13 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class WebSocketApi {
-  currentTime: Date;
-  webSocketEndPoint: string = 'http://localhost:8080/ws';
-  topic: string = "/topic/greetings";
-  stompClient: any;
-  message: any;
+  private webSocketEndPoint: string = 'http://localhost:8080/ws';
+  private topic: string = "/auction/bid";
+  private stompClient: any;
 
   constructor(private messageSubject: Subject<string>) {}
 
   connect(code: string) {
-    console.log("Initialize WebSocket Connection");
     let ws = new SockJS(this.webSocketEndPoint);
     this.stompClient = Stomp.over(ws);
     this.stompClient.connect({}, () => {
@@ -36,9 +33,6 @@ export class WebSocketApi {
 
   errorCallBack(error) {
     console.log("errorCallBack -> " + error)
-    // setTimeout(() => {
-    //     this.connect();
-    // }, 5000);
   }
 
   onMessageReceived(message) {
@@ -46,6 +40,6 @@ export class WebSocketApi {
   }
 
   send(stackDto: any, code: string) {
-    this.stompClient.send("/app/hello" + `/${code}`, {}, JSON.stringify(stackDto));
+    this.stompClient.send("/app/message" + `/${code}`, {}, JSON.stringify(stackDto));
   }
 }

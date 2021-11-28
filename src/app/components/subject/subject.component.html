@@ -11,18 +11,10 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side" [fixedInViewport]="true" [fixedBottomGap]=0 [fixedTopGap]=64 disableClose="true" 
         opened style="border-top: 1px solid rgb(219, 214, 205); width: 200px; height: 100%;">
-        <!-- <mat-selection-list [(ngModel)]="subjectsFilter" [multiple]="false" style="margin-bottom: 15px; border-bottom: 1px solid rgb(219, 214, 205);">
-            <mat-list-option [value]="SubjectsFilter.Bidded.value">Licytowane</mat-list-option>
-            <mat-list-option value="SubjectsFilter.Active">Aktywne</mat-list-option>
-            <mat-list-option value="SubjectsFilter.Bought">Kupione</mat-list-option>
-            <mat-list-option value="SubjectsFilter.Archive" *ngIf="isAdmin">Archiwalne</mat-list-option>
-        </mat-selection-list> -->
-        <!-- (selectionChange)="onFilterChange()" - zamieniam na click, żeby się odświeżało -->
         <mat-selection-list [(ngModel)]="subjectsFilter" (click)="onFilterChange()" [multiple]="false" style="margin-bottom: 15px; border-bottom: 1px solid rgb(219, 214, 205);">
             <div *ngFor="let filter of keys(subjectFiltersEnum)">
                 <mat-list-option *ngIf="(filter!='Archive' || filter!='New') || isAdmin" [selected]="filter=='Active'" [value]="subjectFiltersEnum[filter]">{{ subjectFiltersEnum[filter] }}</mat-list-option>
             </div>
-            <!-- <mat-list-option *ngFor="let filter of keys(filters)" [value]="filters[filter]">{{ filters[filter] }}</mat-list-option> -->
         </mat-selection-list>
         <form #searchForm="ngForm" style="display: flex; width: 165px;">
             <mat-form-field style="padding-left: 16px; width: 140px; font-size: 16px;">
@@ -35,6 +27,7 @@
             </div>
         </form>
         <div style="padding: 10px 16px; font-size: 16px;">
+            <button (click)="test()">test</button>
             <div style="padding-bottom: 5px;">
                 Kategorie:
             </div>
@@ -42,10 +35,6 @@
                 <mat-label *ngIf="!selectedCategories || selectedCategories?.length == 0">Wybierz</mat-label>
                 <mat-select [(ngModel)]="selectedCategories" multiple name="categories" [compareWith]="comparer">
                     <mat-select-trigger>
-                        <!-- {{ selectedCategories?.length == categories?.length ? 'Wszystkie' : selectedCategories ? selectedCategories[0]?.name : '' }}
-                        <span *ngIf="selectedCategories?.length > 1 && selectedCategories.length !== categories.length" class="additional-selection">
-                            (+{{selectedCategories.length - 1}} {{selectedCategories.length === 2 ? 'inna' : 'inne'}})
-                        </span> -->
                         Wybierz
                         <span class="additional-selection">
                             ({{ selectedCategories?.length }})
@@ -68,7 +57,6 @@
             <li *ngFor="let category of selectedCategories" style="overflow: auto; white-space: nowrap;">
                 {{ category.name }}  
             </li>
-            <button (click)="test()">test</button>
         </div>
     </mat-sidenav>
 
@@ -78,17 +66,6 @@
                 <app-subject-card [subjectInput]="subject" [isAdmin]="isAdmin" (refreshEvent)="refresh()"></app-subject-card>
             </mat-grid-tile>
         </mat-grid-list>
-        <!-- <div style="display: flex; width: 165px;">
-            <mat-form-field style="padding-left: 16px; width: 140px; font-size: 16px;">
-                <input matInput placeholder="Szukaj" [(ngModel)]="searchSubject"/>
-            </mat-form-field>
-            <div style="display: flex; align-items: center;">
-                <button [disabled]="testtest()" mat-icon-button color="primary" (click)="test()" type="submit">
-                    <mat-icon>arrow_right_alt</mat-icon>
-                </button>
-            </div>
-        </div> -->
     </mat-sidenav-content>
 
 </mat-sidenav-container>
-

@@ -1,6 +1,6 @@
 <div style="display: flex; flex-direction: column; justify-content: space-between; height: 80%">
     <div style="font-size: 18px; text-align: center;">
-        Błąd: {{ message }}
+        Błąd: {{ message ? message: 'Błąd po stronie serwera' }}
     </div>
     <div style="text-align: center;">
         <button mat-stroked-button color="primary" (click)="close()">Ok</button>

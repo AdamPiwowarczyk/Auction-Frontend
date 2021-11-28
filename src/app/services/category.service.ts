@@ -12,30 +12,14 @@ export class CategoryService {
   constructor(private httpClient: HttpClient) {}
 
   addNew(category: Category) {
-    let tokenAuthorization = localStorage.getItem('token');
-    const headers = {
-      Authorization : tokenAuthorization
-    };
-
-    return this.httpClient.post(`${this.categorytUrl}`, category, { headers });
+    return this.httpClient.post(`${this.categorytUrl}`, category);
   }
 
   delete(categoryName: String) {
-    let tokenAuthorization = localStorage.getItem('token');
-    const headers = {
-      Authorization : tokenAuthorization
-    };
-
-    return this.httpClient.delete(`${this.categorytUrl}/${categoryName}`, { headers });
+    return this.httpClient.delete(`${this.categorytUrl}/${categoryName}`);
   }
 
   getAll() {
-    let tokenAuthorization = localStorage.getItem('token');
-    const headers = {
-      Authorization : tokenAuthorization
-    };
-
-    // return this.httpClient.get(`${this.categorytUrl}`);
-    return this.httpClient.get(`${this.categorytUrl}`, { headers });
+    return this.httpClient.get(`${this.categorytUrl}`);
   }
 }

@@ -4,13 +4,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { SubjectComponent } from './components/subject/subject.component';
-import { TestComponent } from './components/test/test.component';
 import { BidComponent } from './components/bid/bid.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SubjectDetailsComponent } from './components/subject-details/subject-details.component';
-import { CategoryComponent } from './components/category/category.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -58,10 +56,8 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     AppComponent,
     LoginComponent,
     SubjectComponent,
-    TestComponent,
     BidComponent,
     SubjectDetailsComponent,
-    CategoryComponent,
     RegistrationDialogComponent,
     CategoryNewComponent,
     SubjectCardComponent,

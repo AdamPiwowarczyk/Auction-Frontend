@@ -26,5 +26,4 @@ export class CategoryNewComponent {
   cancel(): void {
     this.dialogRef.close();
   }
-
 }

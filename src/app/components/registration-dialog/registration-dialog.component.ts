@@ -1,6 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Credentials } from 'src/app/model/credentials';
 import { AuthService } from 'src/app/services/auth.service';

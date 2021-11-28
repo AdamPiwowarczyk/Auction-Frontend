@@ -4,7 +4,6 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpResponse,
   HttpErrorResponse
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -18,7 +17,12 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((errorResponse: HttpErrorResponse) => {
-        let message = errorResponse.error.message;
+        let message;
+        if (errorResponse.error.error_description?.includes('UserDetailsService returned null')) {
+          message = 'Błędne dane logowania';
+        } else {
+          message = errorResponse.error.message;
+        }
         this.errorDialogService.openDialog(message);
         return throwError(errorResponse);
       }));

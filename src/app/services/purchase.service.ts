@@ -1,48 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
-import { AuctionSubject } from '../model/auction-subject';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PurchaseService {
-  private purchaseUrl = 'http://localhost:9000/api/history';
+  private purchaseUrl = 'http://localhost:9000/api/purchases';
 
   constructor(private httpClient: HttpClient) {}
 
   getLastPrice(username: string, code: string) {
-    let tokenAuthorization = localStorage.getItem('token');
-    const headers = {
-      Authorization : tokenAuthorization
-    }
-
-    return this.httpClient.get(`${this.purchaseUrl}/${username}/${code}`, { headers });
+    return this.httpClient.get(`${this.purchaseUrl}/${username}/${code}`);
   }
 
   getBought(username: string) {
-    let tokenAuthorization = localStorage.getItem('token');
-    const headers = {
-      Authorization : tokenAuthorization
-    }
-
-    return this.httpClient.get(`${this.purchaseUrl}/bought/${username}`, { headers });
+    return this.httpClient.get(`${this.purchaseUrl}/bought/${username}`);
   }
 
   getBidded(username: string) {
-    let tokenAuthorization = localStorage.getItem('token');
-    const headers = {
-      Authorization : tokenAuthorization
-    }
-
-    return this.httpClient.get(`${this.purchaseUrl}/bidded/${username}`, { headers });
+    return this.httpClient.get(`${this.purchaseUrl}/bidded/${username}`);
   }
 
-    getNewBought(code: string, username: string) {
-    let tokenAuthorization = localStorage.getItem('token');
-    const headers = {
-      Authorization : tokenAuthorization
-    }
-
-    return this.httpClient.get(`${this.purchaseUrl}/bought/${code}/${username}`, { headers });
+  getNewBought(code: string, username: string) {
+    return this.httpClient.get(`${this.purchaseUrl}/bought/${code}/${username}`);
   }
 }

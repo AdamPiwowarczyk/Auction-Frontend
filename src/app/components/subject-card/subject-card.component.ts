@@ -16,8 +16,9 @@ export class SubjectCardComponent implements OnInit {
   @Output() refreshEvent = new EventEmitter<void>();
   subject = new AuctionSubject();
 
-  constructor(private subjectService: SubjectService,
-              public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,
+              private subjectService: SubjectService) {}
+
   ngOnInit(): void {
     Object.assign(this.subject, this.subjectInput);
   }
@@ -60,29 +61,18 @@ export class SubjectCardComponent implements OnInit {
     });
   }
 
+  allowEdition(): boolean {
+    return this.isAdmin && this.subject.publishDate == null;
+  }
+
   private async getUpdatedSubject(): Promise<AuctionSubject> {
     return new Promise<AuctionSubject> (resolve => {
       this.subjectService.getSubject(this.subject.code).subscribe(
         (response: AuctionSubject) => {
+          response.picByte = 'data:image/jpeg;base64,' + response.picByte;
           resolve(response);
         }
       )
     })
-  }
-
-  // private async getBidData(): Promise<void> {
-  //   return new Promise<void> (resolve => {
-  //     this.subjectService.getSubject(this.subject.code).subscribe(
-  //       (response: AuctionSubject) => {
-  //         this.bidData = response;
-  //         resolve();
-  //       }
-  //     )
-  //   })
-  // }
-
-  allowEdition(): boolean {
-    // return this.isAdmin && this.subject.publishDate == null;
-    return true;
   }
 }

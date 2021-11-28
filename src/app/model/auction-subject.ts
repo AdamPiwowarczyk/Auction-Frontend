@@ -8,10 +8,10 @@ export class AuctionSubject {
     soldPrice: number;
     categories: Category[] = [];
     publishDate: Date;
-    private endDate: Date;
     picByte?: any;
     bid?: number;
     archive: boolean;
+    private endDate: Date;
 
     set endDateAccessor(val: Date) {
         if (val == null) {
